@@ -72,7 +72,9 @@ const UserWidget = ({ userId, picturePath }) => {
             >
               {firstName} {lastName}
             </Typography>
-            <Typography color={medium}>{friends.length} friends</Typography>
+            {friends && (
+              <Typography color={medium}>{friends.length} friends</Typography>
+            )}
           </Box>
         </FlexBetween>
         <ManageAccountsOutlined />
@@ -93,7 +95,6 @@ const UserWidget = ({ userId, picturePath }) => {
 
       <Divider />
 
-  
       <Box p="1rem 0">
         <FlexBetween mb="0.5rem">
           <Typography color={medium}>Who's viewed your profile</Typography>
@@ -110,7 +111,6 @@ const UserWidget = ({ userId, picturePath }) => {
       </Box>
 
       <Divider />
-
 
       <Box p="1rem 0">
         <Typography fontSize="1rem" color={main} fontWeight="500" mb="1rem">
