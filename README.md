@@ -20,7 +20,7 @@ This project is a social media website built using the MERN (MongoDB, Express.js
 
 ## Demo
 
-[Link to Demo](https://your-demo-link.com)
+[Link to Demo]([https://your-demo-link.com](https://gaurav-bhaskar-social-hub.netlify.app/))
 
 ## Setup
 
