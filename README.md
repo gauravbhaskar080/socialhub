@@ -27,7 +27,7 @@ This project is a social media website built using the MERN (MongoDB, Express.js
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/social-media-website.git
+   git clone https://github.com/gauravbhaskar080/socialhub.git
    ```
 
 2. **Install dependencies:**
@@ -39,11 +39,13 @@ This project is a social media website built using the MERN (MongoDB, Express.js
    npm install
    cd client
    npm install
+   cd server
+   npm install
    ```
 
 3. **Set up MongoDB:**
 
-   - Create a `.env` file in the root directory and add your MongoDB URL:
+   - Create a `.env` file in the server directory and add your MongoDB URL:
 
      ```
      MONGO_URL = 'your_mongo_db_url'
@@ -55,9 +57,10 @@ This project is a social media website built using the MERN (MongoDB, Express.js
 ## Usage
 
 1. **Start the server:**
-
+   In a new terminal window, navigate to the `server` directory and run:
    ```bash
-   node index.js
+   cd server
+   npm start
    ```
 
    The server will start at `http://localhost:3001`.
@@ -113,5 +116,3 @@ If you'd like to contribute to this project, please follow these steps:
 This project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute the code for your own purposes.
 
 ---
-
-Feel free to replace the placeholders (`yourusername` and `social-media-website`) with your actual GitHub username and repository name. Make sure to create a new repository on GitHub and push your local code to that repository.
