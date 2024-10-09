@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { setLogin } from "state";
 import Dropzone from "react-dropzone";
 import FlexBetween from "components/FlexBetween";
+import { InfinitySpin } from "react-loader-spinner";
 import { BASE_URL } from "api";
 
 const registerSchema = yup.object().shape({
@@ -49,6 +50,7 @@ const initialValuesLogin = {
 
 const Form = () => {
   const [pageType, setPageType] = useState("login");
+  const [isLoading, setIsLoading] = useState(false);
   const { palette } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -57,6 +59,7 @@ const Form = () => {
   const isRegister = pageType === "register";
 
   const register = async (values, onSubmitProps) => {
+    setIsLoading(true);
     const formData = new FormData();
     for (let value in values) {
       formData.append(value, values[value]);
@@ -69,6 +72,7 @@ const Form = () => {
     });
     const savedUser = await savedUserResponse.json();
     onSubmitProps.resetForm();
+    setIsLoading(false);
 
     if (savedUser) {
       setPageType("login");
@@ -77,6 +81,7 @@ const Form = () => {
 
   const login = async (values, onSubmitProps) => {
     try {
+      setIsLoading(true);
       const loggedInResponse = await fetch(`${BASE_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -84,6 +89,7 @@ const Form = () => {
       });
       const loggedIn = await loggedInResponse.json();
       onSubmitProps.resetForm();
+      setIsLoading(false);
       if (loggedIn) {
         dispatch(
           setLogin({
@@ -95,6 +101,7 @@ const Form = () => {
       }
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
     // console.log(JSON.stringify(values));
   };
@@ -234,7 +241,7 @@ const Form = () => {
             />
           </Box>
 
-          <Box>
+          {/* <Box>
             <Button
               fullWidth
               type="submit"
@@ -266,7 +273,55 @@ const Form = () => {
                 ? "Don't have an account? Sign Up here."
                 : "Already have an account? Login here."}
             </Typography>
+          </Box> */}
+
+<Box>
+            {isLoading ? (
+              <Box display="flex" justifyContent="center">
+                <InfinitySpin
+                  visible={true}
+                  width="200"
+                  color="#00d5fa"
+                  ariaLabel="infinity-spin-loading"
+                />
+              </Box>
+            ) : (
+              <>
+                <Button
+                  fullWidth
+                  type="submit"
+                  sx={{
+                    m: "2rem 0",
+                    p: "1rem",
+                    backgroundColor: palette.primary.main,
+                    color: palette.background.alt,
+                    "&:hover": { color: palette.primary.main },
+                  }}
+                >
+                  {isLogin ? "LOGIN" : "REGISTER"}
+                </Button>
+                <Typography
+                  onClick={() => {
+                    setPageType(isLogin ? "register" : "login");
+                    resetForm();
+                  }}
+                  sx={{
+                    textDecoration: "underline",
+                    color: palette.primary.main,
+                    "&:hover": {
+                      cursor: "pointer",
+                      color: palette.primary.light,
+                    },
+                  }}
+                >
+                  {isLogin
+                    ? "Don't have an account? Sign Up here."
+                    : "Already have an account? Login here."}
+                </Typography>
+              </>
+            )}
           </Box>
+
         </form>
       )}
     </Formik>
